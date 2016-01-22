@@ -1,25 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/" />
-    <title>Splendid</title>
-    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/style.css" />
-    <script src="/lodash/index.js"></script>
-    <script src="/angular/angular.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-    <script src="/angularfire/dist/angularfire.min.js"></script>
-    <script src="/angular-animate/angular-animate.js"></script>
-    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/angular-ui-bootstrap/ui-bootstrap.js"></script>
-    <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="/socket.io-client/socket.io.js"></script>
-    <script src="/main.js"></script>
+  <base href="/" />
+  <title>Splendid</title>
+  <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <script src="/lodash/index.js"></script>
+  <script src="/angular/angular.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  <script src="/angularfire/dist/angularfire.min.js"></script>
+  <script src="/angular-animate/angular-animate.js"></script>
+  <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/angular-ui-bootstrap/ui-bootstrap.js"></script>
+  <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="/socket.io-client/socket.io.js"></script>
+  <script src="/main.js"></script>
 </head>
 <body ng-app="SplendidGame">
-    <div ng-controller="TestCtrl">
-      <h1>{{ game.title }}</h1>
-      <pre>{{ game }}</pre>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6" ng-controller="BoardCtrl">
+
+        <div class="row" id="row-drawpiles">
+            <drawpile ng-repeat="(gem,count) in board.drawPiles" gem="gem" count="count" ng-class="{ selected: isSelected( gem ) }" ng-click="selectGem( gem )"></drawpile>
+            <button type="button" class="btn" ng-click="drawSelectedGems()">Draw</button>
+        </div>
+
+        <div class="row" id="row-nobles">
+            <card ng-repeat="noble in board.nobles" data="noble"></card>
+        </div>
+
+        <div id="property-grid">
+          <div class="row">
+            <card ng-repeat="card in board.grid[2]" data="card" ng-click="buyProperty( 3, $index )"></card>
+          </div>
+
+          <div class="row">
+            <card ng-repeat="card in board.grid[1]" data="card" ng-click="buyProperty( 2, $index )"></card>
+          </div>
+
+          <div class="row">
+            <card ng-repeat="card in board.grid[0]" data="card" ng-click="buyProperty( 1, $index )"></card>
+          </div>
+        </div>
+
+      </div> <!-- BoardCtrl -->
+
+      <div class="col-xs-12 col-md-6" ng-controller="HandCtrl">
+        <div class="row" ng-repeat="player in hands">
+          <hand player="player" iscurplayer="$index === currentPlayer.$value"></hand>
+        </div>
+      </div>
     </div>
+  </div>
 </body>
 </html>

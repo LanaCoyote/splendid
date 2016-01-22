@@ -1,0 +1,30 @@
+.drawpile {
+  
+  display: inline-block;
+  margin: 5px;
+
+  background-size: 75px;
+  width: 75px;
+  height: 75px;
+
+  .count {
+
+    text-align: center;
+    vertical-align: middle;
+    line-height: 75px;
+
+    font-size: 32pt;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px #0d0d0d;
+    font-family: fantasy;
+
+  }
+
+}
+
+.selected {
+  
+  background: white;
+
+}

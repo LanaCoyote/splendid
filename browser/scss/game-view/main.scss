@@ -1,0 +1,19 @@
+
+
+body {
+  
+  background-image: url("images/wov.png");
+
+}
+
+.container {
+  
+  width: 1360px;
+  background: rgba( 0, 0, 0, 0.3 );
+
+}
+
+@import 'card';
+@import 'cost';
+@import 'drawpile';
+@import 'hand';

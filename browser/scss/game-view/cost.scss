@@ -1,0 +1,41 @@
+.cost-list {
+  
+  list-style: none;
+  padding: 2px;
+  float: left;
+
+  .cost-gem {
+
+    width: 24px;
+    height: 24px;
+    background-size: 24px;
+
+    text-align: center;
+    vertical-align: middle;
+    line-height: 24px;
+    color: white;
+    font-weight: bold;
+    font-size: 12pt;
+    text-shadow: 2px 2px #0d0d0d;
+
+  }
+
+  .ruby {
+    background-image: url( "images/ruby.png" );
+  }
+  .sapphire {
+    background-image: url( "images/sapphire.png" );
+  }
+  .emerald {
+    background-image: url( "images/emerald.png" );
+  }
+  .diamond {
+    background-image: url( "images/diamond.png" );
+    color: black;
+    text-shadow: none;
+  }
+  .chocolate {
+    background-image: url( "images/chocolate.png" );
+  }
+
+}

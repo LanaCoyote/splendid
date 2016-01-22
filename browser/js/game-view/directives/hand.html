@@ -1,0 +1,5 @@
+<div class="hand" ng-class="{ activeplayer: iscurplayer() }">
+  <div class="score">{{ getPoints() }} VP</div>
+  <div class="gems"><drawpile ng-repeat="(gem,count) in gems" gem="gem" count="count"></drawpile></div>
+  <div class="hand"><card ng-repeat="card in hand" data="card"></card></div>
+</div>
