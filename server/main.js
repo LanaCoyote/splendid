@@ -9,18 +9,6 @@ var startFb = require('./app/fb_db');
 // delete these lines
 var Game = require('./app/game/classes/game');
 
-startFb.then( function( ref ) {
-
-  console.log( "Making the game" );
-  var gamesRef = ref.child("games");
-  var newGameRef = gamesRef.push( new Game() );
-  console.log( "All done!" );
-
-})
-.then( null, function( err ) {
-  console.error( "!!!!!!!! MOM HOLY FUCK" );
-  console.error( err );
-})
 
 // Create a node server instance! cOoL!
 var server = require('http').createServer();
@@ -28,7 +16,7 @@ var server = require('http').createServer();
 var createApplication = function () {
     var app = require('./app');
     server.on('request', app); // Attach the Express application.
-    require('./io')(server);   // Attach socket.io.
+    // require('./io')(server);   // Attach socket.io.
 };
 
 var startServer = function () {
@@ -36,12 +24,26 @@ var startServer = function () {
     var PORT = process.env.PORT || 1337;
 
     server.listen(PORT, function () {
-        console.log(chalk.blue('Server started on port', chalk.magenta(PORT)));
+        console.log( chalk.bgBlue( "[EX]" ), chalk.blue('Server started on port', chalk.magenta(PORT)));
     });
 
 };
 
-// startFb.then(createApplication).then(startServer).catch(function (err) {
-//     console.error(chalk.red(err.stack));
-//     process.kill(1);
-// });
+startFb.then( function( ref ) {
+
+  console.log( chalk.yellow.bgRed( "[FB]" ), "Firebase ref received" );
+
+})
+.then( createApplication ).then( startServer ).then( function() {
+
+  console.log( chalk.bgBlue( "[EX]" ), chalk.green( "Server started successfully!" ) );
+
+})
+.then( null, function( err ) {
+  
+  console.error( chalk.magenta( "An error occurred during server operation:" ) );
+  console.error( err.stack );
+  console.error( chalk.magenta( "The process will now terminate" ) )
+  process.exit( 1 );
+
+})

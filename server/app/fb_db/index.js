@@ -10,24 +10,17 @@ function connectToFirebase( uri ) {
     // create a reference to our firebase db
     console.log( chalk.yellow.bgRed( "[FB]" ), "Connecting to Firebase at URI:", chalk.yellow( uri ), ". . ." );
     var ref = new Firebase( uri );
-    ref.connected = false;
 
-    ref.on( "value", function ( ss ) {
+    ref.once( "value", function ( ss ) {
 
-      if ( !ref.connected ) {
-        console.log( chalk.yellow.bgRed( "[FB]" ), chalk.green( "Connection was successful!" ) );
-        ref.connected = true;
-        ok( ref );
-      }
-
+      console.log( chalk.yellow.bgRed( "[FB]" ), chalk.green( "Connection was successful!" ) );
+      ref.connected = true;
+      ok( ref );
+  
     }, function( err ) {
 
-      if ( !ref.connected ) {
-        console.log( chalk.yellow.bgRed( "[FB]" ), chalk.red( "Connection failed:" ), err );
-        fail( err );
-      } else {
-        console.log( chalk.yellow.bgRed( "[FB]" ), chalk.red( "Data read error:" ), err );
-      }
+      console.log( chalk.yellow.bgRed( "[FB]" ), chalk.red( "Connection failed:" ), err );
+      fail( err );
 
     } );
 

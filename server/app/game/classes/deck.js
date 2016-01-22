@@ -8,14 +8,18 @@ function Deck( cardList ) {
 
 Deck.prototype.shuffle = function() {
 
-  for ( var temp, i, j = this.cards.length; i; --i ) {
+  var deck = this.cards.slice();
+  for ( var shuffles = 10; shuffles > 0; --shuffles ) {
+    for ( var i = deck.length - 1; i > 0; --i ) {
 
-    j = Math.floor( Math.random() * i );
-    temp = this.cards[i];
-    this.cards[i] = this.cards[j];
-    this.cards[j] = temp;
+      var swapTarget = Math.floor( Math.random() * i );
+      var temp = deck[i];
+      deck[i] = deck[swapTarget];
+      deck[swapTarget] = temp;
 
+    }
   }
+  this.cards = deck;
 
 }
 
